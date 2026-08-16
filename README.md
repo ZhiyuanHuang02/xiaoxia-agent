@@ -1,19 +1,19 @@
-# 小夏理财伙伴 Agent
+# Xiaoxia Financial Companion Agent
 
-面向年轻人的 AI 理财陪伴 Agent，提供理财知识解释、风险提示、目标拆解、情绪陪伴与复盘建议。
+An AI financial companion designed for young adults. It explains personal-finance concepts, highlights risk, breaks goals into practical steps, supports users through emotional decisions, and encourages regular reflection.
 
-## 本地运行
+## Run locally
 
-1. 安装依赖：`npm install`
-2. 复制环境变量模板：将 `.env.example` 复制为 `.env`
-3. 在 `.env` 中填写 `LLM_API_KEY`
-4. 启动：`npm start`
-5. 打开 `http://localhost:3000`
+1. Install dependencies: `npm install`
+2. Copy `.env.example` to `.env`
+3. Add your `LLM_API_KEY` to `.env`
+4. Start the app: `npm start`
+5. Open `http://localhost:3000`
 
-如果没有可用的大模型接口，可以在 `.env` 中启用演示模式。
+If an LLM endpoint is unavailable, enable demo mode in `.env`.
 
-## 安全说明
+## Security
 
-`.env`、`node_modules` 和运行时生成的 `data/store.json` 不会提交到 GitHub。请勿把 API Key 或真实用户的聊天、财务信息提交到公开仓库。
+`.env`, `node_modules`, and the runtime-generated `data/store.json` are excluded from Git. Never commit API keys or real users' conversations and financial information to a public repository.
 
-本项目仅用于理财教育和风险提示，不构成具体投资建议。
+This project is for financial education and risk awareness only. It does not provide personalized investment advice.

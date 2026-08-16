@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xiaoxia Financial Companion Agent v2.2</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="taskbar">
+      <div class="task-brand">
+        <div class="brand-mark">X</div>
+        <div>
+          <strong>Xiaoxia Financial Companion</strong>
+          <span>AI-Powered Growth Support</span>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-page="home"><span>🏠</span><em>Growth Dashboard</em></button>
+        <button class="nav-item" data-page="chat"><span>💬</span><em>Chat with Xiaoxia</em></button>
+        <button class="nav-item" data-page="moneybit"><span>🐮</span><em>MoneyBit Persona</em></button>
+        <button class="nav-item" data-page="profile"><span>👤</span><em>My Profile</em></button>
+        <button class="nav-item" data-page="goals"><span>🎯</span><em>My Goals</em></button>
+        <button class="nav-item" data-page="review"><span>📈</span><em>My Financial Journal</em></button>
+        <button class="nav-item" data-page="preferences"><span>🧭</span><em>Companion Preferences</em></button>
+      </nav>
+
+      <div class="task-footer">
+        <div class="mini-card"><span>Current mode</span><strong id="sideMode">Loading</strong></div>
+        <div class="mini-card"><span>MoneyBit persona</span><strong id="sideMoneybit">Steady Saver</strong></div>
+      </div>
+    </aside>
+
+    <section class="main">
+      <header class="topbar">
+        <div>
+          <p>China Asset Management · AI Financial Companion MVP</p>
+          <h1 id="pageTitle">Growth Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <span class="pill green">Long-term companion active</span>
+          <span class="pill" id="moneybitPill">Steady Saver</span>
+          <span class="pill" id="modePill">Demo Mode</span>
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <div class="content-grid">
+        <main class="page-area">
+          <section class="page active" id="page-home">
+            <div class="home-hero">
+              <div>
+                <p class="eyebrow">Growth Companion</p>
+                <h2 id="homeGreeting">How can Xiaoxia support you today?</h2>
+                <p id="homeSummary">Xiaoxia first understands your situation and reviews your financial journal, then identifies your current need and offers suitable guidance.</p>
+              </div>
+              <button class="primary" id="updateMeBtn">Update my profile</button>
+            </div>
+
+            
+            <section class="fund-terminal-panel">
+              <div class="terminal-topbar">
+                <div>
+                  <p class="eyebrow">Historical Sample Data · Demo Only</p>
+                  <h2>Growth Dashboard</h2>
+                  <p>
+                    Xiaoxia organizes market samples, your watchlist, and your financial journal into a daily financial-companion dashboard.
+                    The data below is adapted from historical samples and does not represent live markets, actual fund NAVs, or investment advice.
+                  </p>
+                </div>
+                <div class="terminal-actions">
+                  <span class="terminal-badge">Not live market data</span>
+                  <button class="primary" id="dashboardAdviceBtn">Generate today's guidance</button>
+                </div>
+              </div>
+
+              <div class="terminal-layout">
+                <article class="terminal-main-card">
+                  <div class="instrument-header">
+                    <div>
+                      <div class="instrument-kicker">ETF SAMPLE DASHBOARD</div>
+                      <h3 id="instrumentName">Broad-Market ETF Sample</h3>
+                      <div class="instrument-meta">
+                        <span id="instrumentCode">SAMPLE-BROAD</span>
+                        <span>Simulated OTC NAV / exchange price</span>
+                        <span>Historical sample</span>
+                      </div>
+                      <div class="instrument-warning">
+                        All market figures on this page are adapted from historical samples for prototype demonstration only. They are not live data or investment advice.
+                      </div>
+                    </div>
+
+                    <div class="instrument-price-box">
+                      <span>Latest sample price</span>
+                      <strong id="dashLatestPrice">--</strong>
+                      <em id="dashDailyChange">--</em>
+                    </div>
+                  </div>
+
+                  <div class="instrument-switch-row">
+                    <div class="terminal-segment" data-group="asset">
+                      <button class="active" data-asset="broad">Broad-Market ETF Sample</button>
+                      <button data-asset="tech">Technology ETF Sample</button>
+                      <button data-asset="cash">Cash Management Sample</button>
+                    </div>
+                  </div>
+
+                  <div class="quote-stat-grid">
+                    <div class="quote-stat">
+                      <span>Period return</span>
+                      <strong id="dashPeriodReturn">--</strong>
+                    </div>
+                    <div class="quote-stat">
+                      <span>Maximum drawdown</span>
+                      <strong id="dashMaxDrawdown">--</strong>
+                    </div>
+                    <div class="quote-stat">
+                      <span>Annualized volatility</span>
+                      <strong id="dashVolatility">--</strong>
+                    </div>
+                    <div class="quote-stat">
+                      <span>Sharpe ratio</span>
+                      <strong id="dashSharpe">--</strong>
+                    </div>
+                    <div class="quote-stat">
+                      <span>Tracking error</span>
+                      <strong id="dashTrackingError">--</strong>
+                    </div>
+                    <div class="quote-stat">
+                      <span>Sample turnover</span>
+                      <strong id="dashVolume">--</strong>
+                    </div>
+                  </div>
+
+                  <div class="terminal-toolbar">
+                    <div class="terminal-segment" data-group="period">
+                      <button class="active" data-period="1M">1M</button>
+                      <button data-period="3M">3M</button>
+                      <button data-period="6M">6M</button>
+                      <button data-period="1Y">1Y</button>
+                    </div>
+
+                    <div class="terminal-segment" data-group="metric">
+                      <button class="active" data-metric="nav">NAV history</button>
+                      <button data-metric="return">Cumulative return</button>
+                      <button data-metric="drawdown">Maximum drawdown</button>
+                      <button data-metric="volatility">Volatility</button>
+                    </div>
+                  </div>
+
+                  <div class="legend-row">
+                    <span><i class="legend-dot fund-line"></i>Sample fund</span>
+                    <span><i class="legend-dot bench-line"></i>Benchmark index</span>
+                    <span><i class="legend-dot peer-line"></i>Peer average</span>
+                    <span><i class="legend-bar"></i>Sample volume</span>
+                  </div>
+
+                  <div class="terminal-chart-wrap">
+                    <svg id="dashboardChart" viewBox="0 0 980 430" preserveAspectRatio="none"></svg>
+                  </div>
+
+                  <div class="dashboard-caption" id="dashboardCaption">
+                    This chart shows NAV history adapted from historical samples to simulate the reading experience of a real fund or ETF page.
+                  </div>
+
+                  <div class="metric-table">
+                    <div class="metric-table-head">
+                      <span>Metric</span>
+                      <span>1 month</span>
+                      <span>3 months</span>
+                      <span>6 months</span>
+                      <span>1 year</span>
+                    </div>
+                    <div class="metric-table-row" id="returnRow">
+                      <span>Period return</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                    </div>
+                    <div class="metric-table-row" id="drawdownRow">
+                      <span>Maximum drawdown</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                    </div>
+                    <div class="metric-table-row" id="volRow">
+                      <span>Annualized volatility</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                      <span>--</span>
+                    </div>
+                  </div>
+
+                  <div class="terminal-disclaimer">
+                    Historical sample data · Demo only · Not live market data · Does not represent an actual fund NAV · Not investment advice<br><span>* Sample turnover is a demonstration metric, not actual market trading data.</span>
+                  </div>
+                </article>
+
+                <aside class="terminal-side">
+                  <article class="side-panel watch-pool-panel">
+                    <div class="side-panel-head">
+                      <div>
+                        <p class="eyebrow">Watchlist</p>
+                        <h3>My Watchlist</h3>
+                      </div>
+                      <span class="side-tag">Sample</span>
+                    </div>
+
+                    <div class="watch-list" id="watchListRows"></div>
+                  </article>
+
+                  <article class="side-panel xiaoxia-brief-panel">
+                    <div class="side-panel-head">
+                      <div>
+                        <p class="eyebrow">Xiaoxia Brief</p>
+                        <h3>Xiaoxia's Daily Brief</h3>
+                      </div>
+                      <span class="side-tag">AI Companion</span>
+                    </div>
+
+                    <div class="brief-block" id="xiaoxiaBrief">
+                      Reading your profile, watchlist, and sample market data.
+                    </div>
+
+                    <button class="ghost-terminal-btn" id="askFromDashboardBtn">
+                      Ask Xiaoxia to explain this dashboard
+                    </button>
+                  </article>
+
+                  <article class="side-panel finance-log-panel">
+                    <div class="side-panel-head">
+                      <div>
+                        <p class="eyebrow">Finance Log</p>
+                        <h3>Financial Journal Summary</h3>
+                      </div>
+                      <span class="side-tag">Memory</span>
+                    </div>
+
+                    <div class="log-summary-grid">
+                      <div>
+                        <span>Savings this month</span>
+                        <strong id="logSaving">--</strong>
+                      </div>
+                      <div>
+                        <span>Goal progress</span>
+                        <strong id="logGoalRate">--</strong>
+                      </div>
+                      <div>
+                        <span>Emotional state</span>
+                        <strong id="logEmotion">--</strong>
+                      </div>
+                      <div>
+                        <span>Concepts learned</span>
+                        <strong id="logLearned">--</strong>
+                      </div>
+                    </div>
+
+                    <div class="mini-progress-wrap">
+                      <div class="mini-progress-label">
+                        <span>Emergency fund goal</span>
+                        <span id="progressText">--</span>
+                      </div>
+                      <div class="mini-progress-track">
+                        <div id="progressBar" class="mini-progress-bar"></div>
+                      </div>
+                    </div>
+                  </article>
+                </aside>
+              </div>
+            </section>
+
+
+            <div class="overview-grid">
+              <article class="overview-card">
+                <span>Current persona</span>
+                <strong id="homeMoneybit">Steady Saver</strong>
+                <p id="homeMoneybitSub">A disciplined long-term planner</p>
+              </article>
+              <article class="overview-card">
+                <span>Current goal</span>
+                <strong id="homeGoal">Build an emergency fund within six months</strong>
+                <p id="homeGoalProgress">¥2400 / ¥6000</p>
+              </article>
+              <article class="overview-card">
+                <span>Latest journal entry</span>
+                <strong id="homeRecord">Felt anxious during a decline but did not redeem impulsively</strong>
+                <p>Continuing to build financial discipline</p>
+              </article>
+              <article class="overview-card">
+                <span>Today's support focus</span>
+                <strong id="homeFocus">Understand the situation before offering guidance</strong>
+                <p id="homeAction">Waiting for your next question</p>
+              </article>
+            </div>
+
+            <section class="ability-panel">
+              <div class="section-head compact-head">
+                <div>
+                  <p class="eyebrow">How Xia Works</p>
+                  <h2>How Xiaoxia Supports Me</h2>
+                  <p>Instead of answering immediately, Xiaoxia first understands you, assesses the situation, and chooses an appropriate support approach.</p>
+                </div>
+              </div>
+
+              <div class="ability-grid">
+                <article class="ability-card">
+                  <div class="ability-index">01</div>
+                  <h3>Understand Me</h3>
+                  <p>Xiaoxia learns about your profile, MoneyBit persona, goals, and risk tolerance.</p>
+                  <ul>
+                    <li id="understandProfile">Student / able to save ¥800 per month / personal-finance beginner</li>
+                    <li id="understandMoneybit">Steady Saver: a disciplined long-term planner</li>
+                    <li id="understandGoal">Goal: build an emergency fund within six months</li>
+                  </ul>
+                </article>
+
+                <article class="ability-card">
+                  <div class="ability-index">02</div>
+                  <h3>Assess the Situation</h3>
+                  <p>Xiaoxia identifies whether you are anxious, uncertain, chasing performance, or ready for a review.</p>
+                  <ul>
+                    <li id="judgeScene">Current situation: waiting for a question</li>
+                    <li id="judgeEmotion">Emotional state: to be assessed</li>
+                    <li id="judgeRisk">Risk behavior: to be assessed</li>
+                  </ul>
+                </article>
+
+                <article class="ability-card">
+                  <div class="ability-index">03</div>
+                  <h3>Help Me Act</h3>
+                  <p>Within clear safety guardrails, Xiaoxia may explain, reassure, remind, plan, or review.</p>
+                  <ul>
+                    <li id="actMethod">Support approach: waiting for input</li>
+                    <li>Will not make a specific buy or sell decision for you</li>
+                    <li>Helps you understand risk and organize practical actions</li>
+                  </ul>
+                </article>
+              </div>
+
+              <details class="tech-details logic-details" open>
+                <summary>See how Xiaoxia reached this response</summary>
+                <p class="logic-intro">
+                  Xiaoxia does not send your question directly to a model. It first organizes your profile, MoneyBit persona, goals, and financial journal, then assesses the situation and generates guidance within safety guardrails.
+                </p>
+
+                <div class="thinking-grid">
+                  <article class="thinking-card">
+                    <div class="thinking-num">01</div>
+                    <h3>What Xiaoxia Reviewed</h3>
+                    <p>This is not a context-free chat. Xiaoxia first understands who you are.</p>
+                    <dl>
+                      <div><dt>My profile</dt><dd id="behindProfile">Loading</dd></div>
+                      <div><dt>MoneyBit persona</dt><dd id="behindMoneybit">Loading</dd></div>
+                      <div><dt>Financial journal</dt><dd id="behindRecord">Loading</dd></div>
+                    </dl>
+                  </article>
+
+                  <article class="thinking-card">
+                    <div class="thinking-num">02</div>
+                    <h3>What Xiaoxia Assessed</h3>
+                    <p>It identifies your current need and any potential risk behavior.</p>
+                    <dl>
+                      <div><dt>Current situation</dt><dd id="behindScene">Waiting for a question</dd></div>
+                      <div><dt>Emotional state</dt><dd id="behindEmotion">To be assessed</dd></div>
+                      <div><dt>Potential risk</dt><dd id="behindRisk">To be assessed</dd></div>
+                    </dl>
+                  </article>
+
+                  <article class="thinking-card">
+                    <div class="thinking-num">03</div>
+                    <h3>How Xiaoxia Chose to Help</h3>
+                    <p>It does more than answer—it selects the most suitable support approach for this moment.</p>
+                    <dl>
+                      <div><dt>Support approach</dt><dd id="behindAction">Waiting for input</dd></div>
+                      <div><dt>Support focus</dt><dd id="behindFocus">Understand the situation before offering guidance</dd></div>
+                      <div><dt>Next step</dt><dd id="behindNext">Explain, reassure, remind, plan, or review</dd></div>
+                    </dl>
+                  </article>
+
+                  <article class="thinking-card safety-thinking">
+                    <div class="thinking-num">04</div>
+                    <h3>What Xiaoxia Will Not Do</h3>
+                    <p>In financial situations, Xiaoxia must remain within clear safety guardrails.</p>
+                    <ul>
+                      <li>No specific fund recommendations</li>
+                      <li>No promises of returns</li>
+                      <li>No short-term market predictions</li>
+                      <li>No buy or sell decisions made for you</li>
+                      <li>Only helps you understand risk and organize practical actions</li>
+                    </ul>
+                  </article>
+                </div>
+
+                <div class="agent-summary-line">
+                  <span>User profile</span>
+                  <span>MoneyBit persona</span>
+                  <span>Financial journal</span>
+                  <span>Situation assessment</span>
+                  <span>Support strategy</span>
+                  <span>Safety guardrails</span>
+                  <span>Model-generated response</span>
+                </div>
+              </details>
+            </section>
+          </section>
+
+          <section class="page" id="page-chat">
+            <div class="welcome-card split">
+              <div>
+                <p class="eyebrow">Conversation</p>
+                <h2 id="welcomeTitle">Good evening, Alex 👋</h2>
+                <p>Ask what to do after a fund decline, how to build a savings plan, whether to chase a popular theme, or request a monthly review.</p>
+              </div>
+              <div class="current-cow" id="currentCowCard">
+                <img id="currentCowImage" src="/assets/moneybit/moneybit-saver.png" alt="Current MoneyBit persona" />
+                <div><strong id="currentCowName">Steady Saver</strong><span id="currentCowSubtitle">A disciplined long-term planner</span></div>
+              </div>
+            </div>
+
+            <div class="chips">
+              <button data-message="I am new to personal finance and do not know where to begin.">How do I start?</button>
+              <button data-message="My fund is down 5% and I am anxious. Should I sell immediately?">What should I do after a decline?</button>
+              <button data-message="I can save ¥800 per month. Help me build a savings plan.">Build a savings plan</button>
+              <button data-message="AI-themed funds have risen recently and I want to go all in.">I want to chase a popular fund</button>
+              <button data-message="Please summarize my financial progress this month.">Generate a monthly review</button>
+            </div>
+
+            <div class="scene-strip" id="sceneStrip"><span>Waiting for a question</span><span>Companion mode</span><span>Safety guardrails on</span></div>
+
+            <div class="messages" id="messages">
+              <article class="message assistant">
+                <div class="msg-icon">X</div>
+                <div class="msg-card">
+                  <div class="msg-meta">Xiaoxia · Financial Companion</div>
+                  <p>I am not a fund-recommendation bot. I help you understand risk, regulate emotions, build discipline, and review your progress. Choose a MoneyBit persona, then ask a question.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="input-dock">
+              <textarea id="userInput" placeholder="Ask Xiaoxia, for example: My fund is down 3%. What should I do?"></textarea>
+              <button id="sendBtn">Send</button>
+            </div>
+          </section>
+
+          <section class="page" id="page-moneybit">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">MoneyBit Personality</p>
+                <h2>MoneyBit Personas</h2>
+                <p>Each persona shapes Xiaoxia's tone, risk reminders, and suggested actions.</p>
+              </div>
+            </div>
+            <div class="moneybit-grid" id="moneybitGrid"></div>
+            <div class="advice-card">
+              <h3>How does the current persona shape support?</h3>
+              <p id="moneybitStrategyText">After you choose a persona, Xiaoxia adjusts its response strategy to that type.</p>
+            </div>
+          </section>
+
+          <section class="page" id="page-profile">
+            <div class="section-head">
+              <div><p class="eyebrow">My Profile</p><h2>My Profile</h2><p>This information helps Xiaoxia understand you and provide context-aware guidance.</p></div>
+              <button class="primary" id="saveProfileBtn">Save profile</button>
+            </div>
+            <div class="form-card">
+              <label>Name<input id="profile-name" /></label>
+              <label>Age<input id="profile-age" /></label>
+              <label>Identity<input id="profile-identity" /></label>
+              <label>Monthly savings capacity (¥)<input id="profile-monthlySaving" /></label>
+              <label>Current financial goal<input id="profile-goal" /></label>
+              <label>Time horizon<input id="profile-horizon" /></label>
+              <label>Risk tolerance<select id="profile-riskLevel"><option>Low</option><option>Medium</option><option>High</option></select></label>
+              <label>Financial experience<select id="profile-experience"><option>Beginner</option><option>Some experience</option><option>Experienced</option></select></label>
+              <label>MoneyBit persona<select id="profile-moneybitType"><option>Cash Guardian</option><option>Steady Saver</option><option>Lottery Dreamer</option><option>Market Surfer</option></select></label>
+            </div>
+          </section>
+
+          <section class="page" id="page-preferences">
+            <div class="section-head">
+              <div><p class="eyebrow">Preferences</p><h2>Companion Preferences</h2><p>Tell Xiaoxia how you would like to be supported.</p></div>
+              <button class="primary" id="savePreferencesBtn">Save preferences</button>
+            </div>
+            <div class="form-card">
+              <label>Companion style<select id="pref-companionStyle"><option>Warm and encouraging</option><option>Calm and analytical</option><option>Direct reminders</option></select></label>
+              <label>Response detail<select id="pref-detailLevel"><option>Concise</option><option>Standard</option><option>Detailed</option></select></label>
+              <label>Proactive reminder frequency<select id="pref-reminderFrequency"><option>No proactive reminders</option><option>Once a week</option><option>Once a month</option></select></label>
+              <label>During market volatility<select id="pref-marketVolatilityStyle"><option>Reassure me first</option><option>Explain the cause first</option><option>Explain the risk first</option></select></label>
+              <label>Learning style<select id="pref-learningStyle"><option>Concept explanations</option><option>Case examples</option><option>Action checklist</option></select></label>
+            </div>
+          </section>
+
+          <section class="page" id="page-goals">
+            <div class="section-head">
+              <div><p class="eyebrow">My Goal</p><h2>My Goals</h2><p>Turn a broad financial intention into a practical, reviewable goal.</p></div>
+              <button class="primary" id="saveGoalsBtn">Save goals</button>
+            </div>
+            <div class="goal-dashboard">
+              <div class="goal-summary">
+                <span>Goal progress</span>
+                <strong>¥<em id="goal-currentAmount-view">2400</em> / ¥<em id="goal-targetAmount-view">6000</em></strong>
+                <div class="progress"><div id="goal-progress-bar"></div></div>
+                <p id="goal-progress-text">40% complete</p>
+              </div>
+              <div class="form-card compact">
+                <label>Primary goal<input id="goal-primaryGoal" /></label>
+                <label>Target amount<input id="goal-targetAmount" type="number" /></label>
+                <label>Current amount<input id="goal-currentAmount" type="number" /></label>
+                <label>Monthly plan<input id="goal-monthlyPlan" type="number" /></label>
+                <label>Deadline<input id="goal-deadline" /></label>
+              </div>
+            </div>
+            <div class="advice-card"><h3>Actions for This Month</h3><ol id="monthlyAdviceList"></ol></div>
+          </section>
+
+          <section class="page" id="page-review">
+            <div class="section-head">
+              <div><p class="eyebrow">My Records</p><h2>My Financial Journal</h2><p>Record what you have learned, experienced, and changed in your behavior.</p></div>
+              <button class="primary" id="reviewToChatBtn">Ask Xiaoxia for a review</button>
+            </div>
+            <div class="review-grid">
+              <div class="review-card"><span>Concepts learned this month</span><strong id="learnedConceptsView">Money market funds, maximum drawdown</strong></div>
+              <div class="review-card"><span>Behavior change this month</span><strong id="lastBehaviorView">Did not redeem impulsively</strong></div>
+              <div class="review-card"><span>Savings performance</span><strong id="savingProgressView">Completed 75% of this month's savings plan</strong></div>
+            </div>
+            <div class="advice-card"><h3>Growth Record</h3><ul id="growthList"></ul></div>
+            <div class="advice-card"><h3>Suggestions for Next Month</h3><ul id="nextMonthList"></ul></div>
+          </section>
+        </main>
+
+        <aside class="context-panel">
+          <div class="context-card">
+            <h2>Xiaoxia's Current Assessment</h2>
+            <dl>
+              <div><dt>Current page</dt><dd id="contextPage">Growth Dashboard</dd></div>
+              <div><dt>MoneyBit persona</dt><dd id="contextMoneybit">Steady Saver</dd></div>
+              <div><dt>Current need</dt><dd id="contextIntent">Waiting for a question</dd></div>
+              <div><dt>Support approach</dt><dd id="contextAction">Waiting for input</dd></div>
+            </dl>
+          </div>
+          <div class="context-card">
+            <h2>Safety Guardrails</h2>
+            <p>Xiaoxia helps you understand risk, organize practical actions, and reflect on progress. It does not make specific buy or sell decisions for you.</p>
+          </div>
+          <div class="context-card">
+            <h2>Product Positioning</h2>
+            <p>A financial companion for young adults that helps users understand risk, build discipline, regulate emotions, and grow throughout their financial journey.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="./app.js"></script>
+  <script src="./market-dashboard-v26.js"></script>
+  <script src="./logic-panel.js"></script>
+</body>
+</html>
