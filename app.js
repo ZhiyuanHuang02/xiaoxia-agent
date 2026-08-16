@@ -127,7 +127,7 @@ function hydrateMoneybit() {
   $("contextMoneybit").textContent = current;
   $("currentCowName").textContent = current;
   $("currentCowSubtitle").textContent = info.subtitle || "";
-  $("currentCowImage").src = info.image || "/assets/moneybit/moneybit-saver.png";
+  $("currentCowImage").src = info.image || "./assets/moneybit/moneybit-saver.png";
   $("currentCowImage").alt = current;
   $("moneybitStrategyText").textContent = `${current}: ${info.strategy || "Adjust the response strategy to the user's persona."} This shapes Xiaoxia's tone, risk reminders, and action suggestions.`;
 }
